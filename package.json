@@ -1,0 +1,17 @@
+{
+  "type": "module",
+  "name": "final-project-server",
+  "version": "1.0.0",
+  "description": "Node server for final project for web dev",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Calvin Lee",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.9"
+  }
+}
