@@ -17,10 +17,7 @@ export const findUserByCredentials = (userName, password) =>
 
 export const createUser = (user) => UserModel.create(user);
 
-export const deleteUser = (userId) => {
-  UserModel.deleteOne({ _id: userId });
-};
+export const deleteUser = (userId) => UserModel.deleteOne({ _id: userId });
 
-export const updateUser = (userId, newUser) => {
-  UserModel.updateOne({ _id: id }, { $set: newUser });
-};
+export const updateUser = (uid, newUser) =>
+  UserModel.updateOne({ _id: uid }, { $set: newUser });

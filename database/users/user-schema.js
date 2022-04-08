@@ -8,6 +8,7 @@ const UserSchema = mongoose.Schema(
     lastName: String,
     email: { type: String, required: true, unique: true },
     dateJoined: String,
+    aboutUser: String,
     sensitiveInfo: {
       dateOfBirth: String,
       phoneNumber: String,
@@ -16,6 +17,7 @@ const UserSchema = mongoose.Schema(
       weight: Number,
       height: Number,
     },
+    userRole: {type: String, required: true}
   },
   { collection: "user" }
 );

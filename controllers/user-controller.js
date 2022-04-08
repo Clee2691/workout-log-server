@@ -4,10 +4,8 @@ const userController = (app) => {
     app.get('/api/users', findAllUsers);
     app.get('/api/users/:uid', findUserById);
     app.get("/api/users/email/:email", findUserByEmail);
-    app.post("/api/users/credentials/:username/:password", findUserByCredentials);
-
-    app.post("/api/users", createUser);
-    app.put("/api/users/:id", updateUser);
+    
+    app.put("/api/users/:userId", updateUser);
     app.delete("/api/users/:id", deleteUser);
 }
 
@@ -37,35 +35,21 @@ const findUserByEmail = async (req, res) => {
     }
 }
 
-const findUserByCredentials = async (req, res) => {
-    const creds = req.body;
-    const {email, password} = credentials;
-
-    const user = await UserDao.findUserByCredentials(email, password);
-
-    if (user) {
-        res.sendStatus(200);
-    } else {
-        res.sendStatus(403);
-    }
-}
-
-const createUser = async (req, res) => {
-    const user = req.body;
-    const insertedUser = await UserDao.createUser(user);
-    req.json(insertedUser);
-
-}
 const updateUser = async (req, res) => {
     const user = req.body;
-    const userId = req.params.id;
-    const status = await UserDao.updateUser(userId, user);
-    res.json(status);
+    const uid = req.params.userId;
+    const status = await UserDao.updateUser(uid, user);
+    // Set the session to new update user
+    const existingUser = await UserDao.findUserById(uid);
+    existingUser.password = "****";
+    req.session["profile"] = existingUser;
+    res.send(status);
 };
+
 const deleteUser = async (req, res) => {
     const userId = req.params.id;
     const status = await UserDao.deleteUser(userId);
-    res.json(status)
+    res.send(status)
 };
 
 export default userController;
