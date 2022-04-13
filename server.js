@@ -4,9 +4,9 @@ import session from 'express-session';
 import mongoose from 'mongoose';
 
 import AuthController from './controllers/auth-controller.js';
-import SessionController from './controllers/session-controller.js';
 import userController from './controllers/user-controller.js';
 import workoutController from './controllers/workout-controller.js';
+import ReviewController from './controllers/recipe-review-controller.js';
 
 const PORT = process.env.PORT || 4000
 
@@ -37,9 +37,9 @@ if (process.env.ENV === 'production') {
 app.use(session(sess));
 
 AuthController(app);
-SessionController(app);
 userController(app);
 workoutController(app);
+ReviewController(app);
 
 app.listen(PORT, () => {
     console.log(`Server listening on Port: ${PORT}`);
