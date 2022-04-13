@@ -12,3 +12,5 @@ export const createReview = (review) => RecipeRevModel.create(review);
 
 export const deleteReview = (revId) =>
   RecipeRevModel.deleteOne({ _id: revId });
+
+export const findRecentReviews = () => RecipeRevModel.find().sort({revDate: -1}).limit(5);

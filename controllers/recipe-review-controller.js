@@ -1,16 +1,29 @@
 import * as ReviewDao from "../database/recipe/review-dao.js";
 
 const ReviewController = (app) => {
-  app.post("/api/recipe/review", createRecipeReview);
+  app.get("/api/recipe/review/recent", findRecentReviews);
+  app.get("/api/recipe/review/:uid", findRevsByUId);
+
   app.get("/api/recipe/review/:mealId", findReviewsMealId);
+  app.post("/api/recipe/review", createRecipeReview);
   app.delete("/api/recipe/review/:revId", deleteRecipeReview);
+};
+
+const findRecentReviews = async (req, res) => {
+  const recentReviews = await ReviewDao.findRecentReviews();
+  res.json(recentReviews);
 };
 
 const findReviewsMealId = async (req, res) => {
   const mealId = req.params.mealId;
   const mealReviews = await ReviewDao.findAllRevByMealId(mealId);
-
   res.json(mealReviews);
+};
+
+const findRevsByUId = async (req, res) => {
+  const uid = req.params.uid;
+  const userReviews = await ReviewDao.findAllRevByUserId(uid);
+  res.json(userReviews);
 };
 
 const createRecipeReview = async (req, res) => {
@@ -30,9 +43,9 @@ const createRecipeReview = async (req, res) => {
 };
 
 const deleteRecipeReview = async (req, res) => {
-    const {revId} = req.params;
-    const status = await ReviewDao.deleteReview(revId);
-    res.send(status);
-}
+  const { revId } = req.params;
+  const status = await ReviewDao.deleteReview(revId);
+  res.send(status);
+};
 
 export default ReviewController;
