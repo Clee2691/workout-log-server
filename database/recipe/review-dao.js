@@ -1,6 +1,6 @@
 import RecipeRevModel from "./review-model.js";
 
-export const findAllReviews = () => RecipeRevModel.find();
+export const findAllReviews = () => RecipeRevModel.find().sort({ revDate: -1 });
 
 export const findAllRevByMealId = (mealId) => RecipeRevModel.find({ mealId });
 
