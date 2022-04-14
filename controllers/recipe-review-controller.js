@@ -2,9 +2,8 @@ import * as ReviewDao from "../database/recipe/review-dao.js";
 
 const ReviewController = (app) => {
   app.get("/api/recipe/review/recent", findRecentReviews);
-  app.get("/api/recipe/review/:uid", findRevsByUId);
-
-  app.get("/api/recipe/review/:mealId", findReviewsMealId);
+  app.get("/api/recipe/review/meal/:mealId", findReviewsMealId);
+  app.get("/api/recipe/review/user/:uid", findRevsByUId);
   app.post("/api/recipe/review", createRecipeReview);
   app.delete("/api/recipe/review/:revId", deleteRecipeReview);
 };
