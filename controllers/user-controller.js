@@ -11,7 +11,6 @@ const userController = (app) => {
 
 const findAllUsers = async (req, res) => {
   const users = await UserDao.findAllUsers();
-  // TODO: Get rid of sensitive information for users
   users.forEach(user => {
     user.email = "";
     user.password = "";
