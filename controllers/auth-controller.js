@@ -32,9 +32,6 @@ const signup = async (req, res) => {
   // Clear the pw before storing in the session
   insertedUser.password = "****";
   req.session["profile"] = insertedUser;
-  console.log(req.session);
-
-  console.log(insertedUser);
   res.json(insertedUser);
 };
 
