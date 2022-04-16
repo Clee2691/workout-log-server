@@ -13,16 +13,20 @@ import TrainerClientController from './controllers/trainer-client-controller.js'
 import NutritionClientController from './controllers/nutrition-client-controller.js';
 
 const PORT = process.env.PORT || 4000
+const MONGO_DB_STRING = process.env.DB_CONNECTION_STRING || "mongodb://localhost:27017/workout-web-app-db";
+const ORIGIN_STRING = process.env.CORS_ORIGIN || "http://localhost:3000";
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/workout-web-app-db')
+mongoose.connect(MONGO_DB_STRING);
 
 app.use(express.json());
-app.use(cors({
+app.use(
+  cors({
     credentials: true, // Using credentials needs to whitelist domain
-    origin: 'http://localhost:3000'
-}));
+    origin: ORIGIN_STRING,
+  })
+);
 
 let sess = {
     secret: "SOMESECRETKEY",
@@ -31,11 +35,6 @@ let sess = {
     },
     resave: false,
     saveUninitialized: true
-}
-
-if (process.env.ENV === 'production') {
-    app.set('trust proxy', 1);
-    sess.cookie.secure = true;
 }
 
 app.use(session(sess));
