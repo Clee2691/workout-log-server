@@ -9,6 +9,8 @@ import workoutController from './controllers/workout-controller.js';
 import ReviewController from './controllers/recipe-review-controller.js';
 import workoutPlanController from './controllers/workoutPlan-controller.js';
 import mealPlanController from './controllers/mealPlan-controller.js';
+import TrainerClientController from './controllers/trainer-client-controller.js';
+import NutritionClientController from './controllers/nutrition-client-controller.js';
 
 const PORT = process.env.PORT || 4000
 
@@ -44,6 +46,8 @@ workoutController(app);
 ReviewController(app);
 workoutPlanController(app);
 mealPlanController(app);
+TrainerClientController(app);
+NutritionClientController(app);
 
 app.listen(PORT, () => {
     console.log(`Server listening on Port: ${PORT}`);

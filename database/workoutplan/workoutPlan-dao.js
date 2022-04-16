@@ -4,7 +4,7 @@ export const findAllWorkoutPlans = () =>
   WorkoutPlanModel.find();
 
 export const findAllWorkoutsPlansByUID = (userId) =>
-  WorkoutPlanModel.find({ userId }).sort({ _id: -1 });
+  WorkoutPlanModel.find({ trainerId: userId }).sort({ _id: -1 });
 
 export const createNewWorkoutPlan = (workoutPlan) =>
   WorkoutPlanModel.create(workoutPlan);
