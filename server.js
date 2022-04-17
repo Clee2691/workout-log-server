@@ -1,24 +1,26 @@
-import express from 'express';
-import cors from 'cors';
-import session from 'express-session';
-import mongoose from 'mongoose';
+import express from "express";
+import cors from "cors";
+import session from "express-session";
+import mongoose from "mongoose";
 
-import AuthController from './controllers/auth-controller.js';
-import userController from './controllers/user-controller.js';
-import workoutController from './controllers/workout-controller.js';
-import ReviewController from './controllers/recipe-review-controller.js';
-import workoutPlanController from './controllers/workoutPlan-controller.js';
-import mealPlanController from './controllers/mealPlan-controller.js';
-import TrainerClientController from './controllers/trainer-client-controller.js';
-import NutritionClientController from './controllers/nutrition-client-controller.js';
+import AuthController from "./controllers/auth-controller.js";
+import userController from "./controllers/user-controller.js";
+import workoutController from "./controllers/workout-controller.js";
+import ReviewController from "./controllers/recipe-review-controller.js";
+import workoutPlanController from "./controllers/workoutPlan-controller.js";
+import mealPlanController from "./controllers/mealPlan-controller.js";
+import TrainerClientController from "./controllers/trainer-client-controller.js";
+import NutritionClientController from "./controllers/nutrition-client-controller.js";
 
-const PORT = process.env.PORT || 4000
-const MONGO_DB_STRING = process.env.DB_CONNECTION_STRING || "mongodb://localhost:27017/workout-web-app-db";
+const PORT = process.env.PORT || 4000;
+
+const MONGO_CONNECT =
+  process.env.MONGO_DB_STRING || "mongodb://localhost:27017/workout-web-app-db";
 const ORIGIN_STRING = process.env.CORS_ORIGIN || "http://localhost:3000";
 
 const app = express();
 
-mongoose.connect(MONGO_DB_STRING);
+mongoose.connect(MONGO_CONNECT);
 
 app.use(express.json());
 app.use(
@@ -29,13 +31,13 @@ app.use(
 );
 
 let sess = {
-    secret: "SOMESECRETKEY",
-    cookie: {
-        secure: false
-    },
-    resave: false,
-    saveUninitialized: true
-}
+  secret: "SOMESECRETKEY",
+  cookie: {
+    secure: false,
+  },
+  resave: false,
+  saveUninitialized: true,
+};
 
 app.use(session(sess));
 
@@ -49,5 +51,5 @@ TrainerClientController(app);
 NutritionClientController(app);
 
 app.listen(PORT, () => {
-    console.log(`Server listening on Port: ${PORT}`);
+  console.log(`Server listening on Port: ${PORT}`);
 });
