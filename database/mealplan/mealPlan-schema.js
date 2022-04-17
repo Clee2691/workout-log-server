@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const MealPlanSchema = mongoose.Schema(
   {
-    nutritionistId: { type: String, required: true, unique: true },
+    nutritionistId: { type: String, required: true},
     nutritionistName: { type: String },
     name: { type: String, required: true },
     foods: [
