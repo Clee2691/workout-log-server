@@ -34,6 +34,7 @@ let sess = {
   secret: "SOMESECRETKEY",
   cookie: {
     secure: false,
+    sameSite: "strict",
   },
   resave: false,
   saveUninitialized: true,
