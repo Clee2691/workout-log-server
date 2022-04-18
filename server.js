@@ -30,17 +30,31 @@ app.use(
   })
 );
 
-let sess = {
-  secret: "SOMESECRETKEY",
-  cookie: {
-    secure: true,
-    sameSite: 'none'
-  },
-  resave: false,
-  saveUninitialized: true,
-};
+// let sess = {
+//   secret: "SOMESECRETKEY",
+//   cookie: {
+//     secure: true,
+//   },
+//   resave: false,
+//   saveUninitialized: true,
+// };
+// app.set("trust proxy", 1);
+// app.use(session(sess));
+
 app.set("trust proxy", 1);
-app.use(session(sess));
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: true,
+    secret: "your secret text",
+    name: "SomeCookieName",
+    proxy: true,
+    cookie: {
+      secure: true,
+      httpOnly: false,
+    },
+  })
+);
 
 AuthController(app);
 userController(app);
