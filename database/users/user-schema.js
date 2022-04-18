@@ -17,7 +17,9 @@ const UserSchema = mongoose.Schema(
       weight: Number,
       height: Number,
     },
-    userRole: {type: String, required: true}
+    userRole: {type: String, required: true},
+    userProfImgLink: {type: String},
+    userGender: {type: String}
   },
   { collection: "user" }
 );
