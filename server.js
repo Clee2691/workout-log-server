@@ -44,11 +44,12 @@ app.use(express.json());
 
 app.set("trust proxy", 1);
 const cookieSettings = {
-  name:"session1",
-  keys:["SOMESECRETKEY"],
-  secure:false,
-  sameSite:'none'
-}
+  name: "session1",
+  keys: ["SOMESECRETKEY"],
+  secure: true,
+  httpOnly: true,
+  sameSite: "none",
+};
 
 app.use(cookieSession(cookieSettings));
 // app.use((req, res, next) => {
