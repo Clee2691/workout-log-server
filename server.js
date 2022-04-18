@@ -24,12 +24,12 @@ const app = express();
 mongoose.connect(MONGO_CONNECT);
 
 app.use(express.json());
-app.use(
-  cors({
-    credentials: true, // Using credentials needs to whitelist domain
-    origin: ORIGIN_STRING,
-  })
-);
+// app.use(
+//   cors({
+//     credentials: true, // Using credentials needs to whitelist domain
+//     origin: ORIGIN_STRING,
+//   })
+// );
 
 // let sess = {
 //   secret: "SOMESECRETKEY",
@@ -46,11 +46,15 @@ app.set("trust proxy", 1);
 const cookieSettings = {
   name:"session1",
   keys:["SOMESECRETKEY"],
-  secure:true,
+  secure:false,
   sameSite:'none'
 }
 
 app.use(cookieSession(cookieSettings));
+// app.use((req, res, next) => {
+//   req["sessionCookies"].secure = true;
+//   next();
+// });
 // app.use(
 //   session({
 //     resave: false,
