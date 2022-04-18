@@ -49,6 +49,7 @@ const login = async (req, res) => {
     if (match) {
       existingUser.password = "****";
       req.session["profile"] = existingUser;
+      console.log("Setting in login",req.session["profile"]);
       res.json(existingUser);
       // Wrong Password
     } else {
@@ -58,6 +59,7 @@ const login = async (req, res) => {
 };
 
 const profile = (req, res) => {
+  console.log("Get in profile",req.session["profile"]);
   res.json(req.session["profile"]);
 };
 
