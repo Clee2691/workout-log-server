@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import cookieSession from "cookie-session";
+import session from "express-session";
 import mongoose from "mongoose";
 
 import AuthController from "./controllers/auth-controller.js";
@@ -11,6 +11,7 @@ import workoutPlanController from "./controllers/workoutPlan-controller.js";
 import mealPlanController from "./controllers/mealPlan-controller.js";
 import TrainerClientController from "./controllers/trainer-client-controller.js";
 import NutritionClientController from "./controllers/nutrition-client-controller.js";
+
 
 const PORT = process.env.PORT || 4000;
 
@@ -30,16 +31,18 @@ app.use(
   })
 );
 
-app.set("trust proxy", 1);
-const cookieSettings = {
-  name: "session1",
-  keys: ["SOMESECRETKEY"],
-  secure: true,
-  httpOnly: true,
-  sameSite: "none",
+let sess = {
+  secret: "SOMESECRETKEY",
+  cookie: {
+    secure: true,
+    sameSite: 'none'
+  },
+  resave: false,
+  saveUninitialized: true,
 };
 
-app.use(cookieSession(cookieSettings));
+app.set("trust proxy", 1);
+app.use(session(sess));
 
 AuthController(app);
 userController(app);
