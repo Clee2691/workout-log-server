@@ -33,7 +33,8 @@ app.use(
 let sess = {
   secret: "SOMESECRETKEY",
   cookie: {
-    secure: false,
+    secure: true,
+    sameSite: 'none'
   },
   resave: false,
   saveUninitialized: true,
