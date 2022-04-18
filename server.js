@@ -46,11 +46,15 @@ app.set("trust proxy", 1);
 const cookieSettings = {
   name:"session1",
   keys:["SOMESECRETKEY"],
-  secure:true,
+  secure:false,
   sameSite:'none'
 }
 
 app.use(cookieSession(cookieSettings));
+// app.use((req, res, next) => {
+//   req["sessionCookies"].secure = true;
+//   next();
+// });
 // app.use(
 //   session({
 //     resave: false,
