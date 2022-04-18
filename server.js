@@ -52,7 +52,7 @@ app.use(
     cookie: {
       secure: true,
       httpOnly: false,
-      sameSite: 'none'
+      SameSite: 'none'
     },
   })
 );
