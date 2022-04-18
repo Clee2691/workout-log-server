@@ -34,12 +34,11 @@ let sess = {
   secret: "SOMESECRETKEY",
   cookie: {
     secure: false,
-    sameSite: "strict",
   },
   resave: false,
   saveUninitialized: true,
 };
-
+app.set("trust proxy", 1);
 app.use(session(sess));
 
 AuthController(app);
