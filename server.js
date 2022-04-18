@@ -34,7 +34,7 @@ app.set("trust proxy", 1);
 const cookieSettings = {
   name: "session1",
   keys: ["SOMESECRETKEY"],
-  secure: false,
+  secure: true,
   httpOnly: true,
   sameSite: "none",
 };
