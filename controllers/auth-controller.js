@@ -49,7 +49,7 @@ const login = async (req, res) => {
     if (match) {
       existingUser.password = "****";
       req.session["profile"] = existingUser;
-      console.log("Setting in login",req.session["profile"]);
+      console.log("Found user and logging in")
       res.json(existingUser);
       // Wrong Password
     } else {
