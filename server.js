@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import session from "express-session";
 import cookieSession from "cookie-session";
 import mongoose from "mongoose";
 
@@ -24,50 +23,23 @@ const app = express();
 mongoose.connect(MONGO_CONNECT);
 
 app.use(express.json());
-// app.use(
-//   cors({
-//     credentials: true, // Using credentials needs to whitelist domain
-//     origin: ORIGIN_STRING,
-//   })
-// );
-
-// let sess = {
-//   secret: "SOMESECRETKEY",
-//   cookie: {
-//     secure: true,
-//   },
-//   resave: false,
-//   saveUninitialized: true,
-// };
-// app.set("trust proxy", 1);
-// app.use(session(sess));
+app.use(
+  cors({
+    credentials: true, // Using credentials needs to whitelist domain
+    origin: ORIGIN_STRING,
+  })
+);
 
 app.set("trust proxy", 1);
 const cookieSettings = {
   name: "session1",
   keys: ["SOMESECRETKEY"],
-  secure: true,
+  secure: false,
   httpOnly: true,
   sameSite: "none",
 };
 
 app.use(cookieSession(cookieSettings));
-// app.use((req, res, next) => {
-//   req["sessionCookies"].secure = true;
-//   next();
-// });
-// app.use(
-//   session({
-//     resave: false,
-//     saveUninitialized: false,
-//     secret: "your secret text",
-//     name: "SomeCookieName",
-//     cookie: {
-//       secure: true,
-//       sameSite: 'none'
-//     }
-//   })
-// );
 
 AuthController(app);
 userController(app);
