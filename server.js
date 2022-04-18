@@ -24,12 +24,12 @@ const app = express();
 mongoose.connect(MONGO_CONNECT);
 
 app.use(express.json());
-app.use(
-  cors({
-    credentials: true, // Using credentials needs to whitelist domain
-    origin: ORIGIN_STRING,
-  })
-);
+// app.use(
+//   cors({
+//     credentials: true, // Using credentials needs to whitelist domain
+//     origin: ORIGIN_STRING,
+//   })
+// );
 
 // let sess = {
 //   secret: "SOMESECRETKEY",
