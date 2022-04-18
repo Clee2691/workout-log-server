@@ -62,7 +62,7 @@ const profile = (req, res) => {
 };
 
 const logout = (req, res) => {
-  req.session = null;
+  req.session.destroy();
   res.sendStatus(200);
 };
 
