@@ -45,15 +45,13 @@ app.set("trust proxy", 1);
 app.use(
   session({
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     secret: "your secret text",
     name: "SomeCookieName",
-    proxy: true,
     cookie: {
       secure: true,
-      httpOnly: false,
-      SameSite: 'none'
-    },
+      sameSite: 'none'
+    }
   })
 );
 
