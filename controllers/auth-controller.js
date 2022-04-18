@@ -49,6 +49,7 @@ const login = async (req, res) => {
     if (match) {
       existingUser.password = "****";
       req.session["profile"] = existingUser;
+      res.cookie('userCookie', "someCookie", {sameSite:'none', secure:true })
       res.json(existingUser);
       // Wrong Password
     } else {
