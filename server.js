@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import session from "express-session";
+import cookieSession from "cookie-session";
 import mongoose from "mongoose";
 
 import AuthController from "./controllers/auth-controller.js";
@@ -42,18 +43,26 @@ app.use(
 // app.use(session(sess));
 
 app.set("trust proxy", 1);
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: false,
-    secret: "your secret text",
-    name: "SomeCookieName",
-    cookie: {
-      secure: true,
-      sameSite: 'none'
-    }
-  })
-);
+const cookieSettings = {
+  name:"session1",
+  keys:["SOMESECRETKEY"],
+  secure:true,
+  sameSite:'none'
+}
+
+app.use(cookieSession(cookieSettings));
+// app.use(
+//   session({
+//     resave: false,
+//     saveUninitialized: false,
+//     secret: "your secret text",
+//     name: "SomeCookieName",
+//     cookie: {
+//       secure: true,
+//       sameSite: 'none'
+//     }
+//   })
+// );
 
 AuthController(app);
 userController(app);
